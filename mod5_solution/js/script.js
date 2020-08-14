@@ -56,24 +56,10 @@ function switchMenuToActive () {
 
 
 
-
-// We changed this code to retrieve all categories from the server instead of
-// simply requesting home HTML snippet. We now also have another function
-// called buildAndShowHomeHTML that will receive all the categories from the server
-// and process them: choose random category, retrieve home HTML snippet, insert that
-// random category into the home HTML snippet, and then insert that snippet into our
-// main page (index.html).
-//
-// TODO: STEP 1: Substitute [...] below with the *value* of the function buildAndShowHomeHTML,
-// so it can be called when server responds with the categories data.
-
-// On page load (before images or CSS)
-// On first load, show home view
 document.addEventListener("DOMContentLoaded", function (event) {
   showLoading("#main-content");
   $ajaxUtils.sendGetRequest(allCategoriesUrl, buildAndShowHomeHTML);
 });
-
 
 
 // Builds HTML for the home page based on categories array
@@ -81,8 +67,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 function buildAndShowHomeHTML (categories) {
   $ajaxUtils.sendGetRequest(homeHtmlUrl, function (homeHtml) {
       var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
-      var homeHtmlToInsertIntoMainPage = homeHtml;
-      homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlToInsertIntoMainPage, "randomCategoryShortName", chosenCategoryShortName);
+      var homeHtmlToInsertIntoMainPage = insertProperty(homeHtml, "randomCategoryShortName", chosenCategoryShortName);
       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
    }, false);
 }
