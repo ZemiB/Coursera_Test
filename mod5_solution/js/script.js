@@ -80,10 +80,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 // returned from the server.
 function buildAndShowHomeHTML (categories) {
   $ajaxUtils.sendGetRequest(homeHtmlUrl, function (homeHtml) {
-      chooseRandomCategory(categories);
-      var chosenCategoryShortName = categories.short_name;
+      var chosenCategoryShortName = chooseRandomCategory(categories).short_name;
       var homeHtmlToInsertIntoMainPage = homeHtml;
-      homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlToInsertIntoMainPage,short_name, short_name);
+      homeHtmlToInsertIntoMainPage = insertProperty(homeHtmlToInsertIntoMainPage, short_name, short_name);
       insertHtml("#main-content", homeHtmlToInsertIntoMainPage);
    }, false);
 }
